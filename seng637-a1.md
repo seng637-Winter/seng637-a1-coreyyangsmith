@@ -1,365 +1,177 @@
-**SENG 637 - Dependability and Reliability of Software Systems**
->   **Assignment \#1**
->   **Introduction to Testing and Defect (Bug) Tracking**  
->   Instructor: Somaye Modaberi (somayeh.modberi@ucalgary.ca)
->   Department of Electrical and Software Engineering
->   University of Calgary
+>   **SENG 637 - Dependability and Reliability of Software Systems**
 
-Due Date: Check D2L for the submission deadline.
+**Lab. Report \#1 – Introduction to Testing and Defect Tracking**
 
-# 1 Introduction
+| Group: 2 |
+| -------- |
+| Corey Yang-Smith |
+| Eric (Sieu) Diep |
+| Hao Liu |
+| Mehreen Akmal |
+| Jenn Bushey |
 
-This lab is designed to provide students with a comprehensive understanding of software testing. The lab is divided into four main sections:
--   Familiarization with the system under test (SUT) and the defect tracking system
--   Exploratory (manual non-scripted) testing
--   Manual scripted testing
--   Regression testing (re-testing a system after it has been changed)
+**Table of Contents**
 
-In the familiarization stage, students will explore the software system to be tested (System Under Test, or SUT), as well as a typical defect tracking
-system. During the exploratory testing phase, students will be free to test the system in any manner that they choose (and are able). Once students reach
-the manual scripted testing phase, they will be required to use a predefined test suite to test the SUT. Finally, students will perform some simple regression testing on an updated version of the system (corrected by imaginary developers in response to a list of defect reports), and record differing system behavior in the defect tracking system appropriately.
+[1 Introduction](#introduction)
 
-# Objectives
-This lab is designed to provide students with a basic understanding of software testing concepts. By participating in this lab, students will gain:
+[2 High-level description of the exploratory testing plan](#high-level-description-of-the-exploratory-testing-plan)
 
--   Practical experience in testing a software system
--  Knowledge of the differences between exploratory, manual scripted, and regression testing
--   Familiarity with industrial defect tracking systems, processes, and practices.
+[3 Comparison of exploratory and manual functional testing](#comparison-of-exploratory-and-manual-functional-testing)
 
-This lab aims to provide students with a foundational understanding of software testing so that they can apply these concepts in real-world scenarios.
+[4 Notes and discussion of the peer reviews of defect reports](#notes-and-discussion-of-the-peer-reviews-of-defect-reports)
 
-# Pair Testing
-In this lab, two/three students in each group will work together in "pair testing." This technique is a software development method in which two team members work at one keyboard to test the software application. One person will conduct the testing while the other reviews and analyzes the results. This technique can be used between a tester and developer, business analyst, or between two testers who take turns at the keyboard. This approach allows for more efficient and effective testing, as well as an opportunity for team members to learn from each other.
+[5 How the pair testing was managed and team work/effort was divided](#how-the-pair-testing-was-managed-and-team-workeffort-was-divided)
 
-# Group Work
+[6 Difficulties encountered, challenges overcome, and lessons learned](#difficulties-encountered-challenges-overcome-and-lessons-learned)
 
-In this lab, each group will consist of 5 members. Two/Three members will work together in a pair testing method to complete the lab report. After the pair testing, both pairs will combine their reports and submit one final lab report.
+[7 Comments/feedback on the lab and lab document itself](#commentsfeedback)
 
-# Submission Guidelines
-All lab reports in this course should be submitted on GitHub. It is important to follow the suggested format when submitting your lab report on D2L and on GitHub.
+# Introduction
 
-## D2L Submission
--   Please make sure to include your group number
--   Provide the link to your GitHub repository
--   Include the full name and student ID of all group members
+Our work in this lab involved an exploration of different testing techniques, applied to an ATM simulation developed by [Gordon College](https://www.math-cs.gordon.edu/courses/cs211/ATMExample/Links.html). In this lab, we performed three different types of testing: exploratory testing, manual scripted testing, and regression testing on this system. We began by conducting exploratory tests in two independent groups, before moving onto manual scripted testing and finally regression testing.
 
-## GitHub Submission
--   Include your group number
--   Include the first name of all group members
--   It is important to note that personal information such as student ID should not be included in the GitHub submission.
+Before this lab, we knew what was mentioned in the lecture about exploratory and manual testing. That is, exploratory testing involves designing and executing tests at the same time, creatively considering different aspects and edge cases and then executing on those testing ideas. On the other hand, manual scripted testing involves first designing tests in a single stage, and executing these tests at a later date. Finally, we understood beforehand that regression testing was a form of testing designed to compare changes between different versions of software, that is, after an update has been released to ensure that new code changes and bug fixes do not negatively impact existing functionality. We learned in lecture that test cases should be re-run when software gets updated to ensure there are not any unintended consequences from our code releases.
 
--   The main lab report must be submitted in the .md (Markdown File Format) only. Submitting in any other format will result in a loss of marks.
--   You are not allowed to submit Microsoft Word of PDF or any other file format for your main reports.
--   The attachments for example bug list and screen shots can be in any other file format
+# High-level description of the exploratory testing plan
 
--   One member of the group should be responsible for submitting the link to the GitHub repository on D2L. The due date for this assignment can be found on D2L. Make sure to submit your lab report and all necessary files before the deadline.
+For the exploratory testing phase, we first thoroughly read the system requirements and drafted a shortlist of features to test. In our shortlist, we included the following features to be tested:
 
-It is important to follow these guidelines to ensure a smooth submission process and to avoid any issues or delays.
+Test that the customer must include a valid ATM card and valid PIN, to be verified by the bank
+Ensure customer can perform more than one transaction
+Ensure customer can withdrawal from any suitable account in multiples of $20
+Ensure a customer can transfer between accounts
+Ensure customer can abort a transaction
+Ensure customer can make a balance inquiry to any account linked
+Ensure a failed transaction is handled correctly - customer can time out envelope OR  press cancel
+Ensure the card will be permanently retained after 3 invalid PIN entries
+Ensure failure of a transaction displays message and prompts user for another transaction
+Ensure printed receipt is valid
+Successful transaction
+Date
+Time
+Machine location
+Type of transaction
+accounts 
+amount 
+Ending and available balance
+Ensure servicing is valid - on and off switch
+Ensure logging transactions works
 
+From this list, we executed tests for each function and tried various edge cases and regular use cases to extensively test each feature. We documented any bugs we found in our pairs and convened as a group to evaluate the system’s bugs. We performed the extensive exploratory testing phases separately as groups
 
-# Issue Tracking Systems
-The only tool required for this lab is an issue tracking system. In this lab, we will be using Atlassian Jira (https://www.atlassian.com/software/jira) or Azure DevOps (https://azure.com/devops) as our defect tracking system. These systems are widely used in the software industry for managing and tracking bugs and issues. They provide features such as the ability to prioritize and assign defects to developers, advanced search capabilities, and integration with email notifications. By using these systems, students will gain hands-on experience with industry-standard tools for defect tracking.
+## Scope of Testing
 
-To familiarize yourself with these tools, you can use the following source or any other source of your choice:
-- [Reporting bugs in Jira Software](https://marker.io/blog/jira-bug-tracking#reporting-bugs-in-jira-software)
-- Azure DevOps:
-    - [Create Organization](https://aex.dev.azure.com/me?mkt=en-GB)
-    - [Change basic project to (agile, scrum or CMMI)](https://learn.microsoft.com/en-us/azure/devops/organizations/settings/work/change-process-basic-to-agile?view=azure-devops)
-    - [How to report bug as a work item I](https://www.azuredevopsguide.com/creating-a-bug-in-azure-devops/)
-    - [How to report bug as a work item I](https://learn.microsoft.com/en-us/azure/devops/boards/backlogs/manage-bugs?view=azure-devops#bug-work-item-type)
-    
+### Functions To Be Tested
 
-# Lab Materials
-In addition to the lab document, which is to be submitted in a markdown file format, each lab in this course will require additional materials. These materials, known as lab artifacts, may include items such as the software system under test (SUT), source code, and other relevant files. It is important to submit all required lab artifacts as specified in each lab's instructions to ensure proper evaluation of your lab work.
+All the features of the ATM as defined in the High Level Requirements are to be tested:
 
-# System Under Test
+- System Startup
+- System Shutdown
+- Session
+- Transaction
+- Withdrawal
+- Deposit
+- Transfer
+- Inquiry
+- Invalid PIN extension
 
-The system under test for this lab is an ATM simulation system [1]. To get started with this system, download the *lab_artifacts.zip* file under Assignment 1. There are two versions of the ATM system inside that zip file which represent two consecutive releases of the software with bugs and bug fixes (details in the next sections):
 
--   ATM System - Lab 1 Version 1.0
--   ATM System - Lab 1 Version 1.1
+### Functions Not Tested
 
-1.  **Purpose of the System**
+These feature are not be tested because they are not included in the High Level Requirements:
 
-This system was originally developed in an American college (called Gordon College) in order to demonstrate an entire iteration of an object-oriented software development methodology. The entire project is available open-source online, see reference [1] for the URL. The purpose of the system is to allow the user to deposit, withdraw, query and transfer funds to/from his/her hypothetical
-bank account(s).
+- Performance testing (response time, periods of high usage)
+- Usability testing (user interface ease of use)
+- Reliability testing
+- Security Testing
 
-2.  **Usage of the System**
+### Test Types
 
-    To use the ATM simulation system, run JAR file *ATM System – Lab 1 Version 1.0.jar* which is inside *Assignment 1 - artifacts.zip*. The system should begin execution with the GUI as shown in Appendix A.
+1. **Manual Exploratory Testing:** This involves exploring the software without predefined test cases, allowing the tester to learn the application, identify defects, and understand user workflows.
+1. **Manual Scripted Testing:** This involves executing predefined test cases based on specifications, user requirements, or other documentation. This is more structured than exploratory testing.
+1. **Regression Testing:** This type of testing is conducted to ensure that new changes or updates to the software do not negatively impact existing functionalities. This involves re-running both exploratory and scripted tests to verify that the system still behaves as expected.
 
-    There are two valid hard-coded card numbers and PINs:
-    -  Card Number: 1 PIN: 42 Available Accounts: Checking and Savings
+## Test Logistics
+For exploratory unscripted testing, all team members participated in exploration. We employed pair testing and then discussed and compared bugs that had been found and unique bugs were entered into an issue tracking system (Azure). 
 
-    -  Card Number: 2 PIN: 1234 Available Accounts: Checking and Money Market Note:
-    
-    Both of these cards access the same checking account.
+Note: some of the bugs were found initially in the exploratory testing phase. We tested each feature explicitly with manual scripted testing, but the users ‘assigned to’ each bug in Azure may not align with the manual scripted testing list as defined below.
 
-    The initial balances are: Checking: \$100 Savings: \$1,000 Money Market: \$5,000
+Manual Scripted Testing and Regression Testing
+| Name | Test Scripts |
+| ------- | ------------ |
+| Mehreen | 1 - 8 |
+| Jenn | 9 - 16 |
+| Corey | 17 - 24 |
+| Hao | 25 - 32 |
+| Eric | 33 - 40 |
 
-# Instructions
 
-This section outlines the steps required to complete the lab. 
+# Comparison of exploratory and manual functional testing
 
-## Familiarization with the ATM System
+Our exploratory testing involved reading the system requirements and generating test scenarios to fulfill these requirements. This process involved a deeper understanding of the system requirements in order to generate these test cases, and some creativity to think of the different ways in which the systems could be tested. We found most of the bugs through our collaborative exploratory testing which may indicate this as an effective method for a small system, given explicit system requirements. However, our documentation of these processes were less formal and organized, as they were made on-the-fly and resembled quick-notes as opposed to a rigorous testing structure. With this method, we had the flexibility to consider and explore the system and its requirements any way we wanted. Overall, we believe this was a very effective method with this given system, but rigorous manual testing should be able to replicate the same results.
 
-1. Run the JAR file ATM System - Lab 1 Version 1.0.jar to display the GUI 
+On the other hand, the manual testing stage did not take any creativity or engineering-prowess as we simply navigated the program as per the various test cases. This is a task that could be carried out by anyone. That being said, the manual testing gave us more confidence in the integrity of the system as it forced us to test an exhaustive list of features that we did not entirely consider in the exploratory stage. We were more sure that we had covered testing the various features available due to having an explicit numbered list of test cases to attempt - that is, the documentation was much better. In this stage, we did encounter many of the same bugs that we found in the first stage, as well as some new ones we did not consider. This method was effective as well, and it was easier to tick items off a checklist as opposed to navigating our application through free will. It was effective in finding bugs and giving us confidence that each requirement was explicitly met (or not), but there were many redundant tests. Additionally, with the list we were given there were some additional blind spots where manual scripted testing would not have found the bugs in the system.
 
-2. Turn on the system using the “On” button.
+# Notes and discussion of the peer reviews of defect reports
 
-3. Enter the number of \$20 bills that the system is assumed to start with, noting that this is the number of bills, not the total value of the bills. For example, entering a value of 10 indicates that the ATM is starting with \$200 (10 twenty-dollar bills). Any number greater than 0 will suffice for now.
+Reviewing other peers’ defect reports proved easier than expected due to the explicit documentation provided regarding system state, execution, and expected vs actual results. However, at times it was difficult to interpret the reports as we were getting used to the formatting requirements, and which information to include in the various sections. We suspect that with more practice and iterations on different projects, that we would have developed our own framework for bug reporting, as we have become more comfortable navigating ADO and its features. 
 
-4. Click on the “Click to insert card” button which is now displayed on the main interface below the simulated ATM display.
+One thing we would like to improve in future iterations is a consistent naming style, as to be able to quickly identify duplicate bugs at a glance. At times, our explanations of certain bugs seemed similar even if the bugs themselves were different. More care and attention at the bug-naming stage should be considered to provide quick navigation at-a-glance for all group members.
 
-5. The screen will change to a prompt for the user to input the card number (since there is no actual physical card reader). Enter 1 for the card number and press Enter. Upon returning to the main screen, the display will now request the PIN to be entered.
+# How the pair testing was managed and team work/effort was divided 
 
-6. Type 42 using the simulated keypad and press Enter. The display will now prompt the user to perform one of four transactions: withdraw, deposit, transfer, or balance inquiry
+We divided the exploratory testing into groups of 2 and 3 and tested the program freely for 30 minutes. Our testing pairs were as follows:
+Testing Pair #1: Jenn Bushey & Mehreen Akmal
+Testing Pair #2: Hao Liu, Eric Diep, & Corey Yang-Smith
 
-7. Press 2 on the simulated keypad to perform a deposit. The display will now prompt the user to indicate which account they would like to deposit to: checking, savings, or the money market account.
+We tested in a logical use fashion. System startup followed by card and PIN input, followed by checking account balances before attempting withdrawal. After the exploratory testing phase, we compared as a group our findings for version 1.0 and entered our bugs into Azure.
 
-8. Press 2 on the simulated keypad to deposit to the savings account. The display will now prompt the user to enter the deposit amount.
+We divided the scripted test cases into segments of 8 test cases. Each team member was responsible for testing the 8 cases in version 1.0 and version 1.1. Any new bugs found were entered into Azure by the person who found them. 
 
-9. Enter a positive value and press Enter. A button that simulates inserting the deposit envelope will appear.
+We kept track of the performance of the scripted test case both if they passed or if they resulted in a bug. Following the conclusion of the regression testing on the scripted test cases, we randomly went back to determine if the remaining bugs found were resolved in the new SUT. 
 
-10. Click the button to simulate inserting the envelope. The display will prompt the user to perform another transaction or not.
+# Difficulties encountered, challenges overcome, and lessons learned
 
-11. Press 2 on the simulated keypad to indicate that you do not wish to perform another transaction. The main window will show a button that simulates the card being ejected.
+## Difficulties Encountered
 
-12. Press the System Power Button again to turn off the ATM system.
+Difficulties encountered included:
+- Unclear system functionality:
+- Example 1, the select account screen displays all three account types even if the card doesn’t have access to one of the account types. It is unclear if this is a bug or performing as intended. 
+<img width="878" alt="Example1" src="https://github.com/seng637-Winter/seng637-a1-coreyyangsmith/assets/75076886/c5359ea0-9932-49a4-9adf-cd88ad18eaad">
 
 
-## Writing Effective Bug Reports
+- Example 2, in version 1.0, the available balance following a deposit was not updated to match the deposited amount. Unclear if this is a bug or working as intended. Does the bank hold deposit amounts for a period of time before allowing full access to the deposited amounts?
+<img width="878" alt="Example2" src="https://github.com/seng637-Winter/seng637-a1-coreyyangsmith/assets/75076886/c36542d6-0205-4bdb-bc1e-3be5e5b46f51">
 
-When creating bug reports, it's important to include certain key elements that product support teams will expect and require. **When submitting your bug reports, make sure to include**:
 
--   The function being tested (e.g. login)
--   The initial state of the system (e.g. the system is on and idle)
--   Detailed steps to reproduce the defect/bug (e.g. insert a card, enter the correct card number and PIN)
--   The expected outcome (e.g. the system should successfully accept the customer and display the banking menu)
--   The actual outcome (e.g. the system crashes or displays an error message)
--   The priority or severity of the bug (low, medium, high, or critical)
--   TThe version of SUT (V 1.0/ V 1.1) in which the bug was found.
+- During exploratory testing, it was at times hard to separate multiple bugs in one operation and identify what the bug actually was and to document it in a concise manner in the defect report. For example, in version 1.0 when an account was clicked for inquiry that did not belong to the customer instead of “invalid account type” the system displayed account information for a different account and displayed “unknown error” and \$500 on the screen. It was difficult to determine if the unknown error message \$500 value was one error or two and if that had any impact on the balances. 
+<img width="878" alt="Example3" src="https://github.com/seng637-Winter/seng637-a1-coreyyangsmith/assets/75076886/98971881-b955-4d62-a0b9-a1eeea3e067e">
 
 
 
-## Exploratory (Manual Non-scripted) Testing
+## Challenges Overcome
 
-1. In order to perform any testing, the requirements must first be known. Read over the requirements for the ATM simulation system as outlined in Appendix B before continuing with the rest of this section.
+Throughout our testing process, we encountered several challenges, which we successfully overcame through strategic planning and collaboration.
+1. Identification and Documentation of Bugs: Accurately identifying and documenting bugs during exploratory testing was challenging due to the unstructured nature of this testing method. To counter this, we developed a standardized bug-reporting template and conducted group discussions and knowledge-sharing sessions on how to use it effectively. This streamlined the process, ensuring that all bugs were accurately reported and documented.
+2. Interpreting Ambiguous Requirements: The ambiguity in some of the system requirements led to some initial confusions. We overcame this by conducting internal brainstorming sessions to reach a consensus on how to interpret these requirements. This proactive approach prevented potential misunderstandings and misaligned testing efforts.
 
-2. Before beginning testing, try to come up with a high-level exploratory test plan for how you intend to test the system. Record key details of this plan, as it will be required in the lab report. This plan could include but is not limited to, information such as: functions being targeted, the approach to be taken (test most functions a little bit, or test a few functions extensively, etc.), and how you plan to come up with test cases (test most common paths, or exceptional paths, etc.).
-Keep in mind that this does not need to necessarily be the best plan, as long as it is justifiable.
 
-1. Reporting defects: Carry out your devised exploratory test plan for roughly half an hour. Each pair of students needs to perform exploratory testing and record defects. While performing the tests, if any of the actual results differ from the expected results, report that as a defect. Record defects as they are found before forgetting the defect and its detailed conditions. At the end, two pairs of each group will review all defects and report them in the bug tracking tool.
+## Lessons Learned
+Lessons learned:
+- Manual bug testing is quite tedious 
+- It was easy to get lost in the exploratory bug testing. Where are we in the program? Did we actually enter the right selection?
+- The system requirements need to be extremely clear and very detailed. 
+- Testing one small workflow can result in multiple test cases. 
+- In the exploratory testing, reproducing a bug experienced previously can be tricky if the steps are not clearly documented
+- With exploratory testing it is likely that all the bugs are not caught since not all functionality is accounted for. With comparison of the pair testing defect reports there were some overlap of bugs found and there was some difference between the results. 
+- Therefore to track bugs efficiently, a scripted and systematic approach is necessary keeping the requirements in mind and recording the bugs in an issue tracking system. The issue tracking system allows for bugs to be prioritized and fixed in a timely manner. 
 
-## Manual Scripted Testing
- This section is to be performed as a group. One student can ‘drive’ the testing (operate the computer executing the system under test), while the other student keeps track of which tests have been performed, reports any defects found, and determines what order to execute tests in. Keep track of what order the tests are executed in, as it will be useful information later on. Note that it does not matter which student reports the defects, as it is a group effort.
+## Comments/Feedback
 
-1.  In Appendix C, a basic test suite has been provided for this SUT. Execute each of the test cases at least once, verifying that the actual results match the expected results for each case. Report any defects found. In order to differentiate between defects found during this stage and the previous stage, in the summary field type “MFT:“ (Manual Functional Testing) before the summary of the defect. Do not report defects which have already been found by your group during the exploratory testing phase, however you may wish to take note of which defects are found using both testing methods as it may be relevant in your report.
+For ease of marking, we have added the test case number in the title of each bug.
+This exercise was useful practice in differentiating, understanding and gaining knowledge of the different testing methods. Through execution of each testing type we were able to get practical experience in testing a software system while using an industrial defect tracking system. 
+We believe that test case #37 and #39  in Appendix C are the same. However, we followed the instructions as is and created a bug report for each case as if they are different. 
 
-2.  Upon completion of testing, review all defect reports created. To do this,perform a search (in backlog, you may need to use the your project innavigation bar then “Issues” and then “Search” feature for this) for defectscontaining “MFT:” in the summary field. This will produce a list of thenewly added defect reports. The student who was previously executing thetests should now be the main participant in reviewing the defect reports.
+The lab document at first glance was a bit hard to follow as there are many sections however after reading through the whole lab twice it was easier to follow. 
 
-## Regression Testing (Verification of Defect Fixes)
-
-This section is to be performed as a group. The defects reported in the twoprevious stages of testing can be divided among the 
-group members and can beretested individually.
-
-1.  Download the updated version (version 1.1) of the ATM simulation system from blackboard. This version of the system has been partially fixed by imaginary developers based on the defect reports previously existing.
-
-2.  Add an additional version (1.1) for your product in your bug tracking system, by simply using the same procedure for reporting the issues in version section writhe but version 1.1 (the issues for previous version should be marked as 1.0).
-
-3.  Perform a search in your bug tracking tool for all defects reported by your group for version 1.0 of the ATM system product.
-
-4.  Retest each of these defects to determine which have been fixed and which have not. Since we do not know which defects have been fixed exactly, assume that all defects have had an attempt to fix them. Update the defect status to Resolved (Fixed) by opening that defect for editing, and changing its status appropriately. If the defect has actually been fixed in the ATM system version 1.1, change the status once again to RSOLVED. If the defect has not actually been fixed in the ATM system version 1.1, change the status to IN-PROGRESS and write a comment stating “Defect still exists in version 1.1”.
-
-5.  Execute steps 4 and 5 (Manual Scripted Testing) once again, looking only for new defects that have been created. If a defect is found which had previously been reported, do not report it again. When reporting these defects, ensure that version 1.1 is selected.
-
-# Summary
-Within your group, you should now each be familiar with the main features of a bug tracking system, and have a general understanding of how to use it to effectively report and track defects. You have also progressed through a short iteration of exploratory testing, two iterations of manual functional testing and an iteration of regression testing.
-
-# Deliverables and Grading
-
-For this assignment, you need to submit one Excel/PDF/Markdown file and the lab report.
-
-## Defect Reports (60%)
-
-Grading for students will be based on the quality of their defect reports, which must be submitted to their GitHub repository. They should use the designated bug tracking system to create a detailed report of any bugs found, in either PDF, Excel, or Markdown format. If the tool does not produce a report, one must be manually created.
-
-The grading criteria (rubric) for defect reports are as follows.
-
-| **Defect Reports**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |     |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
-| Correctness: Do the defect reports contain the detailed defect information:<br>- The function being tested is clearly stated?<br>- The initial state of the system is accurately described?<br>- The steps to reproduce the defect are detailed and precise?<br>- The expected outcome is correctly mentioned?<br>- The actual outcome is clearly stated?<br>- The priority or severity of the bug is appropriately classified?<br>- The version of the SUT in which the bug was found is correctly noted?<br>- Has the status of the bug changed after the regression test? | 40% |
-| Number of defects found: Note that not all defects need to be found. But if it appears that not enough effort was made in finding defects, marks may be deducted.                                                                                                                                                                                                                                                                                                                                                                           | 20% |
-
-
-## Lab Report (40%)
-
-To be consistent, please use the template markdown file “seng438-1-team_number.md” provided online. Change the team number to your team number. If desired, feel free to rename the sections, as long as the headings are still descriptive and accurate.
-
-| **Lab Report**                                                                                                                                                                      |     |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
-| Test plan including (check [Test_Plan_Sample.pdf](https://d2l.ucalgary.ca/d2l/le/content/570970/viewContent/6290762/View) on D2L for more information):<br>- Test Types<br>- Scope of Testing<br>- Test Logistics (Who tests each functionality) | 15% |
-| A comparison of exploratory and manual functional testing (based on the provided test suite) from several perspectives (e.g., benefits, tradeoffs, effectiveness, efficiency, etc.) | 15% |
-| Notes and discussion of the peer reviews of defect reports created by each pair in a group.                                                                                         | 5%  |
-
-| **Reflection and Learning**                                                                                                                                                         |     |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --- |
-| Any difficulties encountered, challenges overcome, and lessons learned from performing the lab                                                                                                                      | 2%  |
-| Comments/feedback on the lab and lab document itself. (Did you find it a useful practice? Was it easy to follow?) Please try to keep comments and feedback constructive.| 3%  |
-
-# Acknowledgements
-
-This lab is part of a software-testing laboratory course available under a Creative Commons license.
-
-Some part of this document has been developed in the former SoftQual lab of University of Calgary for teaching SENG 437.
-
-# References
-
--  [1] R. C. Bjork, "Example ATM Simulation System," Internet: http://www.math-cs.gordon.edu/courses/cps211/ATMExample/ [Jan, 2017]
--  [2] J. B. Cem Kaner, Bret Pettichord, "Chapter 4 - Bug Advocacy," in Lessons Learned in Software Testing, New York: John Wiley & Sons Inc., 2002.
--  [3] C. Kaner, "Assignment - Replicate and Edit Bugs," 2008.
-
-
-# Appendix
-## Appendix A: GUI
-
-![](media/sut-gui.jpeg)
-
-## Appendix B: High Level Requirements
-
-The software to be designed will control a simulated Automated Teller Machine
-(ATM) having a magnetic stripe reader for reading an ATM card, a customer
-console (keyboard and display) for interaction with the customer, a slot for
-depositing envelopes, a dispenser for cash (in multiples of \$20), a printer for
-printing customer receipts, and a key-operated switch to allow an operator to
-start or stop the machine. The ATM will communicate with the bank's computer
-over an appropriate communication link. (The software on the latter is not part
-of the requirements for this problem.)
-
-The ATM will service one customer at a time. A customer will be required to
-insert an ATM card and enter a Personal Identification Number (PIN) - both of
-which will be sent to the bank for validation as part of each transaction. The
-customer will then be able to perform one or more transactions. The card will be
-retained in the machine until the customer indicates that he/she desires no
-further transactions, at which point it will be returned - except as noted
-below.
-
->   The ATM must be able to provide the following services to the customer:
-
--   A customer must be able to make a cash withdrawal from any suitable account
-    linked to the card, in multiples of
-
-    \$20.00. Approval must be obtained from the bank before cash is dispensed.
-
-    -   A customer must be able to make a deposit to any account linked to the
-        card, consisting of cash and/or checks in an envelope. The customer will
-        enter the amount of the deposit into the ATM, subject to manual
-        verification when the envelope is removed from the machine by an
-        operator. Approval must be obtained from the bank before physically
-        accepting the envelope.
-
-        -   A customer must be able to make a transfer of money between any two
-            accounts linked to the card.
-
-        -   A customer must be able to make a balance inquiry of any account
-            linked to the card.
-
-        -   A customer must be able to abort a transaction in progress by
-            pressing the Cancel key instead of responding to a request from the
-            machine.
-
-The ATM will communicate each transaction to the bank and obtain verification
-that it was allowed by the bank. Ordinarily, a transaction will be considered
-complete by the bank once it has been approved. In the case of a deposit, a
-second message will be sent to the bank indicating that the customer has
-deposited the envelope. (If the customer fails to deposit the envelope within
-the timeout period, or presses cancel instead, no second message will be sent to
-the bank and the deposit will not be credited to the customer.)
-
-If the bank determines that the customer's PIN is invalid, the customer will be
-required to re-enter the PIN before a transaction can proceed. If the customer
-is unable to successfully enter the PIN after three tries, the card will be
-permanently retained by the machine, and the customer will have to contact the
-bank to get it back.
-
-If a transaction fails for any reason other than an invalid PIN, the ATM will
-display an explanation of the problem, and will then ask the customer whether
-he/she wants to do another transaction.
-
-The ATM will provide the customer with a printed receipt for each successful
-transaction, showing the date, time, machine location, type of transaction,
-account(s), amount, and ending and available balance(s) of the affected account
-("to" account for transfers).
-
-The ATM will have a key-operated switch that will allow an operator to start and
-stop the servicing of customers. After turning the switch to the "on" position,
-the operator will be required to verify and enter the total cash on hand. The
-machine can only be turned off when it is not servicing a customer. When the
-switch is moved to the "off" position, the machine will shut down, so that the
-operator may remove deposit envelopes and reload the machine with cash, blank
-receipts, etc.
-
-The ATM will also maintain an internal log of transactions to facilitate
-resolving ambiguities arising from a hardware failure in the middle of a
-transaction. Entries will be made in the log when the ATM is started up and shut
-down, for each message sent to the Bank (along with the response back, if one is
-expected), for the dispensing of cash, and for the receiving of an envelope. Log
-entries may contain card numbers and dollar amounts, but for security will
-*never* contain a PIN.
-
-
-## Appendix C: SUT Use Cases
-![](media/sut-usecases.jpeg)
-
-| **Test Case \#** | **Use Case**        | **Function Being Tested**                                        | **Initial System State**                                    | **Input**                                             | **Expected Output**                                                                      |
-| ---------------- | ------------------- | ---------------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| 1                | **System Startup**  | System is started when the switch is turned "on"                 | System is off                                               | Activate the "on" switch                              | System requests initial cash amount                                                      |
-| 2                | **System Startup**  | System accepts initial cash amount                               | System is requesting cash amount                            | Enter a legitimate amount                             | System is on                                                                             |
-| 3                | **System Startup**  | Connection to the bank is established                            | System has just been turned on                              | Perform a legitimate inquiry transaction              | System output should demonstrate that a connection has been established to the Bank      |
-| 4                | **System Shutdown** | System is shut down when the switch is turned “off"              | System is on and not servicing a customer                   | Activate the "off" switch                             | System is off                                                                            |
-| 5                | **Session**         | System reads a customer's ATM card                               | System is on and not servicing a customer                   | Insert a readable card                                | Card is accepted; System asks for entry of PIN                                           |
-| 6                | **Session**         | System rejects an unreadable card                                | System is on and not servicing a customer                   | Insert an unreadable card                             | Card is ejected; System displays an error screen; System is ready to start a new session |
-| 7                | **Session**         | System accepts customer's PIN                                    | System is asking for entry of PIN                           | Enter a PIN                                           | System displays a menu of transaction types                                              |
-| 8                | **Session**         | System allows customer to perform a transaction                  | System is displaying menu of transaction types              | Perform a transaction                                 | System asks whether customer wants another transaction                                   |
-| 9                | **Session**         | System allows multiple transactions in one session               | System is asking whether customer wants another transaction | Answer yes                                            | System displays a menu of transaction types                                              |
-| 10               | **Session**         | Session ends when customer chooses not to do another transaction | System is asking whether customer wants another transaction | Answer no                                             | System ejects card and is ready to start a new session                                   |
-| 11               | **Transaction**     | System handles an invalid PIN properly                           | A readable card has been entered                            | Enter an incorrect PIN and then attempt a transaction | The Invalid PIN exception is performed                                                   |
-
-| 12  | **Withdrawal** | System asks customer to choose an account to withdraw from                                             | Menu of transaction types is being displayed                                                                                      | Choose Withdrawal transaction                                                                    | System displays a menu of account types                                                                                                                                                                                |
-| --- | -------------- | ------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 13  | **Withdrawal** | System asks customer to choose a dollar amount to withdraw                                             | Menu of account types is being displayed                                                                                          | Choose checking account                                                                          | System displays a menu of possible withdrawal amounts                                                                                                                                                                  |
-| 14  | **Withdrawal** | System performs a legitimate withdrawal transaction properly                                           | System is displaying the menu of withdrawal amounts                                                                               | Choose an amount that the system currently has and which is not greater than the account balance | System dispenses this amount of cash; System prints a correct receipt showing amount and correct updated balance; System records transaction correctly in the log (showing both message to the bank and approval back) |
-| 15  | **Withdrawal** | System verifies that it has sufficient cash on hand to fulfill the request                             | System has been started up with less than the maximum withdrawal amount in cash on hand; System is requesting a withdrawal amount | Choose an amount greater than what the system currently has                                      | System displays an appropriate message and asks customer to choose a different amount                                                                                                                                  |
-| 16  | **Withdrawal** | System verifies that customer's balance is sufficient to fulfill the request                           | System is requesting a withdrawal amount                                                                                          | Choose an amount that the system currently has but which is greater than the account balance     | System displays an appropriate message and offers customer the option of choosing to do another transaction or not.                                                                                                    |
-| 17  | **Withdrawal** | A withdrawal transaction can be cancelled by the customer any time prior to choosing the dollar amount | System is displaying menu of account types                                                                                        | Press "Cancel" key                                                                               | System displays an appropriate message and offers customer the option of choosing to do another transaction or not.                                                                                                    |
-| 18  | **Withdrawal** | A withdrawal transaction can be cancelled by the customer any time prior to choosing the dollar amount | System is displaying menu of dollar amounts                                                                                       | Press "Cancel" key                                                                               | System displays an appropriate message and offers customer the option of choosing to do another transaction or not.                                                                                                    |
-| 19  | **Deposit**    | System asks customer to choose an account to deposit to                                                | Menu of transaction types is being displayed                                                                                      | Choose Deposit transaction                                                                       | System displays a menu of account types                                                                                                                                                                                |
-| 20  | **Deposit**    | System asks customer to enter a dollar amount to deposit                                               | Menu of account types is being displayed                                                                                          | Choose checking account                                                                          | System displays a request for the customer to type a dollar amount                                                                                                                                                     |
-
-| 21  | **Deposit**  | System asks customer to insert an envelope                                                     | System is displaying a request for the customer to type a dollar amount | Enter a legitimate dollar amount | System requests that customer insert an envelope                                                                                                                                                                                  |
-| --- | ------------ | ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- | -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 22  | **Deposit**  | System performs a legitimate deposit transaction properly                                      | System is requesting that customer insert an envelope                   | Insert an envelope               | System accepts envelope; System prints a correct receipt showing amount and correct updated balance; System records transaction correctly in the log (showing message to the bank, approval back, and acceptance of the envelope) |
-| 23  | **Deposit**  | A deposit transaction can be cancelled by the customer any time prior to inserting an envelope | System is displaying menu of account types                              | Press "Cancel" key               | System displays an appropriate message and offers customer the option of choosing to do another transaction or not.                                                                                                               |
-| 24  | **Deposit**  | A deposit transaction can be cancelled by the customer any time prior to inserting an envelope | System is requesting customer to enter a dollar amount                  | Press "Cancel" key               | System displays an appropriate message and offers customer the option of choosing to do another transaction or not.                                                                                                               |
-| 25  | **Deposit**  | A deposit transaction can be cancelled by the customer any time prior to inserting an envelope | System is requesting customer to insert an envelope                     | Press "Cancel" key               | System displays an appropriate message and offers customer the option of choosing to do another transaction or not.                                                                                                               |
-| 26  | **Transfer** | System asks customer to choose an account to transfer from                                     | Menu of transaction types is being displayed                            | Choose Transfer transaction      | System displays a menu of account types specifying transfer from                                                                                                                                                                  |
-| 27  | **Transfer** | System asks customer to choose an account to transfer to                                       | Menu of account types to transfer from is being displayed               | Choose checking account          | System displays a menu of account types specifying transfer to                                                                                                                                                                    |
-| 28  | **Transfer** | System asks customer to enter a dollar amount to transfer                                      | Menu of account types to transfer to is being displayed                 | Choose savings account           | System displays a request for the customer to type a dollar amount                                                                                                                                                                |
-| 29  | **Transfer** | System performs a legitimate transfer transaction properly                                     | System is displaying a request for the customer to type a dollar amount | Enter a legitimate dollar amount | System prints a correct receipt showing amount and correct updated balance; System records transaction correctly in the log (showing both message to the bank and approval back)                                                  |
-| 30  | **Transfer** | A transfer transaction                                                                         | System is displaying                                                    | Press "Cancel"                   | System displays an appropriate                                                                                                                                                                                                    |
-|     |              | can be cancelled by the                                                                        | menu of account types                                                   | key                              | message and offers customer the                                                                                                                                                                                                   |
-|     |              | customer any time                                                                              | specifying transfer                                                     |                                  | option of choosing to do another                                                                                                                                                                                                  |
-|     |              | prior to entering dollar                                                                       | from                                                                    |                                  | transaction or not.                                                                                                                                                                                                               |
-|     |              | amount                                                                                         |                                                                         |                                  |                                                                                                                                                                                                                                   |
-
-| 31  | **Transfer**              | A transfer transaction can be cancelled by the customer any time prior to entering dollar amount | System is displaying menu of account types specifying transfer to | Press "Cancel" key                                                                        | System displays an appropriate message and offers customer the option of choosing to do another transaction or not.                                           |
-| --- | ------------------------- | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 32  | **Transfer**              | A transfer transaction can be cancelled by the customer any time prior to entering dollar amount | System is requesting customer to enter a dollar amount            | Press "Cancel" key                                                                        | System displays an appropriate message and offers customer the option of choosing to do another transaction or not.                                           |
-| 33  | **Inquiry**               | System asks customer to choose an account to inquire about                                       | Menu of transaction types is being displayed                      | Choose Inquiry transaction                                                                | System displays a menu of account types                                                                                                                       |
-| 34  | **Inquiry**               | System performs a legitimate inquiry transaction properly                                        | System is displaying menu of account types                        | Choose checking account                                                                   | System prints a correct receipt showing correct balance; System records transaction correctly in the log (showing both message to the bank and approval back) |
-| 35  | **Inquiry**               | An inquiry transaction can be cancelled by the customer any time prior to choosing an account    | System is displaying menu of account types                        | Press "Cancel" key                                                                        | System displays an appropriate message and offers customer the option of choosing to do another transaction or not.                                           |
-| 36  | **Invalid PIN Extension** | Customer is asked to reenter PIN                                                                 | System is asking for entry of PIN                                 | Enter an incorrect PIN; Attempt an inquiry transaction on the customer's checking account | Customer is asked to re-enter PIN                                                                                                                             |
-| 37  | **Invalid PIN Extension** | Correct re-entry of PIN is accepted                                                              | Request to re-enter PIN is being displayed                        | Enter correct PIN                                                                         | Original transaction completes successfully                                                                                                                   |
-| 38  | **Invalid PIN Extension** | Incorrect re-entry of PIN is not accepted                                                        | Request to re-enter PIN is being displayed                        | Enter incorrect PIN                                                                       | An appropriate message is displayed and re-entry of the PIN is again requested                                                                                |
-| 39  | **Invalid PIN Extension** | Correct re-entry of PIN on the second try is accepted                                            | Request to re-enter PIN is being displayed                        | Enter incorrect PIN the first time, then correct PIN the second time                      | Original transaction completes successfully                                                                                                                   |
-| 40  | **Invalid PIN Extension** | Correct re-entry of PIN on the third try is accepted                                             | Request to re-enter PIN is being displayed                        | Enter incorrect PIN the first time and second times, then correct PIN the third time      | Original transaction completes successfully                                                                                                                   |
+Overall, this was a good exploration of different testing methodologies on a real program. The exploratory testing was a good creative exercise in exploring a program based on system requirements. Manual testing was a methodical way to test aspects of the program. The regression testing on version 1.0 to version 1.1 was a good exploration of how bugs get solved, but how new bugs may get introduced.
